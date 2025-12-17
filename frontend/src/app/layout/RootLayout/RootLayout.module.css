@@ -1,0 +1,44 @@
+.rootLayout {
+  min-height: 100vh;
+}
+
+.logo {
+  height: 32px;
+  margin: 16px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  padding: 0;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+}
+
+.collapseButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 24px;
+  height: 64px;
+  font-size: 18px;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+}
+
+.headerRight {
+  margin-left: auto;
+  margin-right: 24px;
+}
+
+.content {
+  margin: 24px 16px;
+  padding: 24px;
+  min-height: 280px;
+  background: #fff;
+  border-radius: 8px;
+  overflow: auto;
+}
