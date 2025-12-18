@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   Put,
+  Query,
   UseGuards,
   UsePipes,
   ValidationPipe,
@@ -27,8 +28,8 @@ export class UserController {
   @Roles('ADMIN')
   @UseGuards(RoleGuard)
   @Get()
-  async getAll() {
-    return this.userService.getAll();
+  async getAll(@Query('role') role?: UserRole) {
+    return this.userService.getAll(role);
   }
 
   @Get('profile')

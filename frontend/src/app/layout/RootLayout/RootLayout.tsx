@@ -1,12 +1,7 @@
 import {
   AppstoreOutlined,
-  BuildOutlined,
-  CalculatorOutlined,
-  CodeSandboxOutlined,
-  HomeOutlined,
   MenuFoldOutlined,
-  MenuUnfoldOutlined,
-  TagsOutlined
+  MenuUnfoldOutlined
 } from '@ant-design/icons';
 import { Layout, Menu } from 'antd';
 import { useState } from 'react';
@@ -21,12 +16,7 @@ export const RootLayout = () => {
   const location = useLocation();
 
   const menuItems = [
-    { key: '/', icon: <AppstoreOutlined />, label: 'Продукты' },
-    { key: '/product-types', icon: <TagsOutlined />, label: 'Типы продукта' },
-    { key: '/materials', icon: <CodeSandboxOutlined />, label: 'Материалы' },
-    { key: '/workshops', icon: <HomeOutlined />, label: 'Мастерские' },
-    { key: '/product-workshops', icon: <BuildOutlined />, label: 'Производства'},
-    { key: '/calculator', icon: <CalculatorOutlined />, label: 'Калькулятор' }, 
+    { key: '/', icon: <AppstoreOutlined />, label: 'Заявки' },
   ];
 
   return (
@@ -37,7 +27,7 @@ export const RootLayout = () => {
         collapsed={collapsed}
         className={styles.sider}
       >
-        <img src='/images/logo.png' className={styles.logo} />
+        <div className={styles.logo} />
         <Menu
           theme="dark"
           mode="inline"

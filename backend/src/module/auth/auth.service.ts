@@ -42,7 +42,6 @@ export class AuthService {
           login,
           password: hashedPassword,
           role: 'CLIENT',
-          isActive: true,
         },
       });
 
@@ -77,7 +76,7 @@ export class AuthService {
 
   async validatePassword(dto: LoginDto): Promise<boolean> {
     const user = await this.prisma.user.findUnique({
-      where: { phone: dto.login },
+      where: { login: dto.login },
     });
 
     if (!user) {
@@ -147,7 +146,7 @@ export class AuthService {
         where: { id: result.id },
       });
 
-      if (!user || !user.isActive) {
+      if (!user) {
         throw new UnauthorizedException('Пользователь не найден или неактивен');
       }
 
@@ -170,7 +169,6 @@ export class AuthService {
       phone: user.phone,
       name: user.name,
       role: user.role,
-      isActive: user.isActive,
     };
   }
 }

@@ -40,7 +40,6 @@ export class OrderedPartService {
       },
     });
 
-    // Update request status to WAITING_PARTS
     if (request.requestStatus === 'IN_PROGRESS') {
       await this.prisma.request.update({
         where: { id: dto.requestId },
@@ -49,7 +48,6 @@ export class OrderedPartService {
         },
       });
 
-      // Create notification for master
       if (request.masterID) {
         await this.prisma.notification.create({
           data: {
@@ -127,7 +125,6 @@ export class OrderedPartService {
       },
     });
 
-    // If all parts delivered, can update request status back to IN_PROGRESS
     if (dto.status === 'DELIVERED') {
       const pendingParts = await this.prisma.orderedPart.count({
         where: {

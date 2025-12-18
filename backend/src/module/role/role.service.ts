@@ -1,4 +1,3 @@
-// src/role/role.service.ts
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { UserRole } from '@prisma/client';
 

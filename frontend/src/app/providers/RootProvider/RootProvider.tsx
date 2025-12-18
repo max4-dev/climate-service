@@ -6,7 +6,7 @@ import "@/app/styles/style.css"
 export const RootProvider = () => {
   return (
     <QueryProvider>
-      <RouterProvider />
+        <RouterProvider />
     </QueryProvider>
   )
 }

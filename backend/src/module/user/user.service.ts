@@ -13,19 +13,16 @@ import { UserPasswordDto, UserProfileDto } from './dto/user.dto';
 export class UserService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async getAll() {
+  async getAll(role?: UserRole) {
     const users = await this.prisma.user.findMany({
+      where: role ? { role } : {},
       select: {
         id: true,
         phone: true,
         name: true,
         role: true,
-        isActive: true,
         createdAt: true,
         updatedAt: true,
-      },
-      where: {
-        isActive: true,
       },
     });
 
@@ -40,7 +37,6 @@ export class UserService {
         phone: true,
         name: true,
         role: true,
-        isActive: true,
         createdAt: true,
         updatedAt: true,
       },
@@ -57,7 +53,6 @@ export class UserService {
     const specialists = await this.prisma.user.findMany({
       where: {
         role: 'SPECIALIST',
-        isActive: true,
       },
       select: {
         id: true,
@@ -97,7 +92,6 @@ export class UserService {
         phone: true,
         name: true,
         role: true,
-        isActive: true,
       },
     });
 
@@ -147,36 +141,6 @@ export class UserService {
     }
 
     return user.role;
-  }
-
-  async deactivateUser(id: string) {
-    const user = await this.prisma.user.update({
-      where: { id },
-      data: {
-        isActive: false,
-      },
-      select: {
-        id: true,
-        name: true,
-      },
-    });
-
-    return user;
-  }
-
-  async activateUser(id: string) {
-    const user = await this.prisma.user.update({
-      where: { id },
-      data: {
-        isActive: true,
-      },
-      select: {
-        id: true,
-        name: true,
-      },
-    });
-
-    return user;
   }
 
   async assignRole(id: string, dto: { role: UserRole }) {

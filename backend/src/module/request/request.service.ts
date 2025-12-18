@@ -36,9 +36,17 @@ export class RequestService {
         climateTechType: dto.climateTechType,
         climateTechModel: dto.climateTechModel,
         problemDescription: dto.problemDescription,
-        requestStatus: 'OPEN',
+
+        requestStatus: dto.requestStatus,
+
+        startDate: new Date(dto.startDate),
+
         client: {
           connect: { id: client.id },
+        },
+
+        master: {
+          connect: { id: dto.masterId },
         },
       },
     });
@@ -46,10 +54,22 @@ export class RequestService {
     await this.prisma.statusHistory.create({
       data: {
         requestId: request.id,
-        newStatus: 'OPEN',
+        newStatus: dto.requestStatus,
         oldStatus: 'OPEN',
       },
     });
+
+    if (dto.masterId) {
+      await this.prisma.notification.create({
+        data: {
+          userId: dto.masterId,
+          requestId: request.id,
+          type: 'ASSIGNED_TO_YOU',
+          title: 'Вам назначена новая заявка',
+          message: `Вам назначена заявка #${request.id}`,
+        },
+      });
+    }
 
     return request;
   }
