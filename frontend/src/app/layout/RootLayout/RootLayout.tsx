@@ -3,7 +3,6 @@ import { logout } from "@/shared/api";
 import {
   AppstoreOutlined,
   BarChartOutlined,
-  BellOutlined,
   CommentOutlined,
   LogoutOutlined,
   MenuFoldOutlined,
@@ -30,13 +29,6 @@ export const RootLayout = () => {
       key: "/",
       icon: <AppstoreOutlined />,
       label: "Заявки",
-    },
-    {
-      key: "/notifications",
-      icon: (
-        <BellOutlined />
-      ),
-      label: "Уведомления",
     },
     ...(user?.role === "ADMIN"
       ? [

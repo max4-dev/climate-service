@@ -1,7 +1,6 @@
 import { RootLayout } from "@/app/layout/RootLayout/RootLayout";
 import { LoginPage, RegisterPage } from "@/pages/auth/ui";
 import { CommentsPage } from "@/pages/comment/ui/CommentsPage/CommentsPage";
-import { NotificationsPage } from "@/pages/notification/ui/NotificationsPage/NotificationsPage";
 import { OrderedPartsPage } from "@/pages/ordered-part/ui/OrderedPartsPage/OrderedPartsPage";
 import { RequestDetailPageWrapper } from "@/pages/request/ui/RequestDetailPage/RequestDetailPage";
 import { RequestPage } from "@/pages/request/ui/RequestPage/RequestPage";
@@ -23,7 +22,7 @@ export const RouterProvider = () => {
           <Route path="/users" element={<UsersManagementPage />} />
           <Route path="statistics" element={<StatisticsPage />} />
 
-            <Route path="notifications" element={<NotificationsPage />} />
+            {/* <Route path="notifications" element={<NotificationsPage />} /> */}
 
             <Route path="parts" element={<OrderedPartsPage />} />
 
