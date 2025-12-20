@@ -4,7 +4,6 @@ import {
   Get,
   HttpCode,
   Param,
-  Patch,
   Put,
   Query,
   UseGuards,
@@ -78,7 +77,7 @@ export class UserController {
   @UsePipes(new ValidationPipe())
   @HttpCode(200)
   @Roles('ADMIN')
-  @Patch('role/:id')
+  @Put(':id/role')
   async assignRole(@Param('id') id: string, @Body() dto: { role: UserRole }) {
     return this.userService.assignRole(id, dto);
   }

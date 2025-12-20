@@ -1,14 +1,4 @@
-import {
-  Controller,
-  Delete,
-  Get,
-  HttpCode,
-  Param,
-  Put,
-  Query,
-  UsePipes,
-  ValidationPipe,
-} from '@nestjs/common';
+import { Controller, Delete, Get, HttpCode, Param, Put } from '@nestjs/common';
 import { Auth } from 'src/module/auth/decorators/auth.decorator';
 import { CurrentUser } from 'src/module/auth/decorators/user.decorator';
 import { NotificationService } from './notification.service';
@@ -17,21 +7,21 @@ import { NotificationService } from './notification.service';
 export class NotificationController {
   constructor(private readonly notificationService: NotificationService) {}
 
-  @HttpCode(200)
-  @Auth()
-  @Get('my')
-  async getMyNotifications(
-    @CurrentUser('id') userId: string,
-    @Query('skip') skip?: number,
-    @Query('take') take?: number,
-    @Query('isRead') isRead?: string,
-  ) {
-    return this.notificationService.getByUserId(userId, {
-      skip,
-      take,
-      isRead: isRead ? isRead === 'true' : undefined,
-    });
-  }
+  // @HttpCode(200)
+  // @Auth()
+  // @Get('my')
+  // async getMyNotifications(
+  //   @CurrentUser('id') userId: string,
+  //   @Query('skip') skip?: number,
+  //   @Query('take') take?: number,
+  //   @Query('isRead') isRead?: string,
+  // ) {
+  //   return this.notificationService.getByUserId(userId, {
+  //     skip,
+  //     take,
+  //     isRead: isRead ? isRead === 'true' : undefined,
+  //   });
+  // }
 
   @HttpCode(200)
   @Auth()
@@ -49,13 +39,13 @@ export class NotificationController {
     return this.notificationService.getById(id);
   }
 
-  @UsePipes(new ValidationPipe())
-  @HttpCode(200)
-  @Auth()
-  @Put(':id/read')
-  async markAsRead(@Param('id') id: string) {
-    return this.notificationService.markAsRead(id);
-  }
+  // @UsePipes(new ValidationPipe())
+  // @HttpCode(200)
+  // @Auth()
+  // @Put(':id/read')
+  // async markAsRead(@Param('id') id: string) {
+  //   return this.notificationService.markAsRead(id);
+  // }
 
   @HttpCode(200)
   @Auth()
@@ -69,5 +59,17 @@ export class NotificationController {
   @Delete(':id')
   async delete(@Param('id') id: string) {
     return this.notificationService.delete(id);
+  }
+
+  @Get()
+  @Auth()
+  async getMyNotifications(@CurrentUser('id') userId: string) {
+    return this.notificationService.getUserNotifications(userId);
+  }
+
+  @Put(':id/read')
+  @Auth()
+  async markAsRead(@Param('id') id: string) {
+    return this.notificationService.markAsRead(id);
   }
 }

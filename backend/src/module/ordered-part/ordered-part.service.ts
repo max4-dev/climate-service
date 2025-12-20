@@ -165,4 +165,18 @@ export class OrderedPartService {
       },
     });
   }
+
+  async getAllParts() {
+    return this.prisma.orderedPart.findMany({
+      orderBy: { orderDate: 'desc' },
+      include: {
+        request: {
+          select: {
+            id: true,
+            climateTechModel: true,
+          },
+        },
+      },
+    });
+  }
 }

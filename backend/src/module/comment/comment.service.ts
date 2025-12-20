@@ -115,4 +115,26 @@ export class CommentService {
       where: { id },
     });
   }
+
+  async getAllComments() {
+    return this.prisma.comment.findMany({
+      orderBy: { createdAt: 'desc' },
+      take: 50,
+      include: {
+        master: {
+          select: {
+            id: true,
+            name: true,
+            role: true,
+          },
+        },
+        request: {
+          select: {
+            id: true,
+            climateTechModel: true,
+          },
+        },
+      },
+    });
+  }
 }

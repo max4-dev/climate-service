@@ -57,7 +57,7 @@ client.interceptors.response.use(
 
       try {
         const access = await handleRefreshToken(oldRefreshToken);
-        saveTokenStorage({ access, refresh: oldRefreshToken });
+        saveTokenStorage({ accessToken: access, refreshToken: oldRefreshToken });
 
         config.headers.Authorization = `Bearer ${access}`;
         return client(config);

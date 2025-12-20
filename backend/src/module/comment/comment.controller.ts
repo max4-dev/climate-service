@@ -23,6 +23,14 @@ import { CreateCommentDto, UpdateCommentDto } from './dto/comment.dto';
 export class CommentController {
   constructor(private readonly commentService: CommentService) {}
 
+  @Get('all')
+  @Auth()
+  @Roles('ADMIN', 'MANAGER')
+  @UseGuards(RoleGuard)
+  async getAllComments() {
+    return this.commentService.getAllComments();
+  }
+
   @UsePipes(new ValidationPipe())
   @HttpCode(201)
   @Roles('SPECIALIST', 'MANAGER')

@@ -26,6 +26,14 @@ import { OrderedPartService } from './ordered-part.service';
 export class OrderedPartController {
   constructor(private readonly orderedPartService: OrderedPartService) {}
 
+  @Get('all')
+  @Auth()
+  @Roles('ADMIN', 'MANAGER')
+  @UseGuards(RoleGuard)
+  async getAllParts() {
+    return this.orderedPartService.getAllParts();
+  }
+
   @UsePipes(new ValidationPipe())
   @HttpCode(201)
   @Roles('SPECIALIST', 'MANAGER', 'ADMIN')
